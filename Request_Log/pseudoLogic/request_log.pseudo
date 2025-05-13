@@ -1,0 +1,89 @@
+"""
+API : INC -1P08
+Name : Create SLT Order
+Description : Place SLT Order (Request Log API)
+Created By : Gayana Waraketiya (gayana.waraketiya@gmail.com), Dilmi Rangana (dilmirangana1234@gmail.com)
+Created No :
+Version: 1.0
+IP :  request_id
+      case_id
+      order_id
+      account_num
+      parameters
+      request_status
+      request_status_description
+          
+OP : None
+*/
+"""
+
+"""
+    Version: Python 3.12.4
+    Dependencies: Library
+    Related Files: request-log.py, request_log_class.py
+    Purpose: 
+    Version:
+        version: 1.0
+        Last Modified Date: 2024-04-04
+        Modified By: Gayana Waraketiya (gayana.waraketiya@gmail.com), Dilmi Rangana (dilmirangana1234@gmail.com)  
+        Changes:     
+
+    Notes:
+"""
+
+BEGIN
+    try {
+        
+        Read parameters: case_id,order_id, account_no,parameters,request_status, request_status_description,request_status_dtm;
+
+        validation:
+            if case_id is null:
+                raise customise exception "Case ID can not null";
+            if case_id not in db:
+                raise customise exception "Case ID not found in db";
+            if account_no is null:
+                raise customise exception "Account No can not null";
+            if account_no is not 10 digit:
+                raise customise exception "Account No must be 10 digit";      
+            if order_id is null:
+                raise customise exception "Order ID can not null";
+
+            //If the request ID already exists, raise an error
+            if request_id in db:
+                raise customise exception "Request ID already exists in db";
+
+            //if no request_id is provided (useful when called inside another API)
+            if request_id is null:
+                request_id = generate_request_id(); // Generate a new request ID
+
+            // Add the details to the request_log database and reques_progress_log db
+            request_log.insert(request_id, case_id, order_id, account_no, status, status_description, created_at, updated_at);
+            request_progress_log.insert(request_id, case_id, order_id, account_no, status, status_description, created_at, updated_at);
+            
+            //Check if the order ID is 1,2,3 or 4
+            if order_id == 1:
+                status = "success";
+                status_description = "Cust Details for Case Registartion";
+            else if order_id == 2:
+                status = "success";
+                status_description = "Monitor Payment";
+            else if order_id == 3:
+                status = "error";
+                status_description = "Monitor Payment Cancel";
+            else if order_id == 4:
+                status = "error";
+                status_description = "Close Monitor If No Transaction";
+            else:
+                raise customise exception "Invalid Order ID";
+
+            //Add the details to the order_details database
+            order_details_db.insert(request_id, case_id, order_id, account_no, status, status_description, created_at, updated_at);
+
+    } catch customise exception(err) {
+        status = error;
+        status_description = err.description; 
+    }catch(err) {
+        status = error;
+        status_description = err.description;
+    }
+END

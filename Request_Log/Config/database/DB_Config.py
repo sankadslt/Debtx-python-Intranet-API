@@ -1,0 +1,15 @@
+# MONGO_URI = "mongodb+srv://ravindupathumiit:3HfuZnnEzCEKlaKC@cluster0.obtrr.mongodb.net"
+MONGO_URI ="mongodb://localhost:27017/"
+DB_NAME = "DRS"
+# SYSTEM_TASK_COLLECTION_NAME = "System_tasks"
+# TEMPLATE_TASK_COLLECTION_NAME = "Template_tasks"
+# CASE_DETAIL_COLLECTION_NAME = "Case_details_vx"
+# TMP_CASE_DISTRIBUTION_DRC ="Tmp_Case_Distribution_DRC"
+# TMP_CASE_DISTRIBUTION_DRC_SUMMARY="Case_Distribution_DRC_Summary"
+incident_collection = "Incident"
+process_monitor_collection = "Process_Monitor"
+process_monitor_collection_log = "Process_Monitor_Log"
+case_settlement_collection = "Case_Settlements"
+settlement_collection = "Settlements"
+
+
