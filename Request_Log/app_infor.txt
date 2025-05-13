@@ -1,0 +1,32 @@
+"""
+API : INC -1P08
+Name : Create SLT Order
+Description : Place SLT Order (Request Log API)
+Created By : Gayana Waraketiya (gayana.waraketiya@gmail.com), Dilmi Rangana (dilmirangana1234@gmail.com)
+Created No :
+Version: 1.0
+IP : 
+      case_id
+      order_id
+      account_num
+      parameters
+      request_status
+      request_status_description
+          
+OP : None
+*/
+"""
+
+"""
+    Version: Python 3.12.4
+    Dependencies: Library
+    Related Files: request-log.py, request_log_class.py
+    Purpose: 
+    Version:
+        version: 1.0
+        Last Modified Date: 2024-03-30
+        Modified By: Gayana Waraketiya (gayana.waraketiya@gmail.com), Dilmi Rangana (dilmirangana1234@gmail.com)  
+        Changes:     
+
+    Notes:
+"""
